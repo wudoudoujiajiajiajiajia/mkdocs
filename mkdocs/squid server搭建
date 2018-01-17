@@ -1,0 +1,47 @@
+
+squid 服务器搭建重试 
+  1 Windows下的：
+        C:\Windows\System32\drivers\etc\hosts文件的配置
+        
+        配置如下： 代理服务器IP  源服务器的域名
+  2 squid代理服务器：
+        /etc/hosts的优先级高于//usr/local/squid/etc/hosts的配置情况
+       
+            配置如下：源服务器IP   源服务器域名
+         
+         vi /etc/resolv.conf
+    
+         回援问题 简单粗暴得解决  cahce_peer问题
+         
+         日志显示：squidlog -a 察看
+         
+         在回源没有解决之前有一个WARNING: Forwarding loop detected for:
+                在配置文件中加了nonhierarchical_direct off  默认通知邻居parent
+                
+          curl -svo /dev/null http://www.wu.com/index.html -x 127.0.0.1:80  [-H] 详细显示  
+        
+  3 虚拟机充当源服务器：
+    ifconfg 查看IP地址
+    
+    日志：
+          vim /etc/httpd/conf/httpd.conf
+          关键字  logs/access_log 
+          find / -name 名字    
+          使用    tailf /var/log/httpd/access_log  在虚拟机看日志
+          
+    域名解析
+           dig www.baidu.com @8.8.8.8
+   
+    ip与子网掩码的配置文件：
+          vim /etc/sysconfig/network-scripts/ifcfg-eth0
+    /etc/init.d/network restart 或者  service network restart:
+           配置文件更改后 重新部署启动
+           
+    ip route:结果
+          10.0.0.30/31 dev eth0  proto kernel  scope link  src 10.0.0.30  metric 1 
+          default via 10.0.0.30 dev eth0  proto static 
+    
+    
+    注意 1  防火墙问题 service iptables stop 
+        2  注意IP的变动 
+
