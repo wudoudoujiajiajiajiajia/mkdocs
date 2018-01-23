@@ -7,3 +7,14 @@
   TCP_REFRESH_HIT:DIRECT Squid发现请求资源的貌似陈旧的拷贝，并发送确认请求到原始服务器。原始服务器返回304（未修改）响应，指示squid的拷贝仍旧是新鲜的。（Squid直接转发请求到原始服务器）
   TCP_CLIENT_REFRESH_MISS:DIRECT Squid发现了请求资源的拷贝，但客户端的请求包含了Cache-Control: no-cache指令。Squid转发客户端的请求到原始服务器，强迫cache确认。（Squid直接转发请求到原始服务器）
   TCP_MISS:NONE Squid没有请求资源的cache拷贝。（这指明Squid对本次请求，不会与任何其他服务器（邻居或原始服务器）通信）
+
+
+
+注意：
+
+：NONE 直接返回客户端
+：DIRECT经过源服务器进行查询 再返回客户端
+
+
+
+
