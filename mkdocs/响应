@@ -1,0 +1,9 @@
+  TCP_NEGATIVE_HIT:NONE 在对原始服务器的请求导致HTTP错误时，Squid也会cache这个响应。在短时间内对这些资源的重复请求，导致了否命中。
+  TCP_IMS_HIT:NONE  客户端发送确认请求，Squid发现更近来的、貌似新鲜的请求资源的拷贝。Squid发送更新的内容到客户端，而不联系原始服务器。（这指明Squid对本次请求，不会与任何其他服务器（邻居或原始服务器）通信。）
+  TCP_HIT:NONE Squid发现请求资源的貌似新鲜的拷贝，并将其立即发送到客户端。
+  TCP_MISS:DIRECT Squid没有请求资源的cache拷贝。（Squid直接转发请求到原始服务器）
+  TCP_MEM_HIT:NONE  从内存的响应
+  TCP_DENIED:NONE 因为http_access或http_reply_access规则，客户端的请求被拒绝了   全是错误地址链接
+  TCP_REFRESH_HIT:DIRECT Squid发现请求资源的貌似陈旧的拷贝，并发送确认请求到原始服务器。原始服务器返回304（未修改）响应，指示squid的拷贝仍旧是新鲜的。（Squid直接转发请求到原始服务器）
+  TCP_CLIENT_REFRESH_MISS:DIRECT Squid发现了请求资源的拷贝，但客户端的请求包含了Cache-Control: no-cache指令。Squid转发客户端的请求到原始服务器，强迫cache确认。（Squid直接转发请求到原始服务器）
+  TCP_MISS:NONE Squid没有请求资源的cache拷贝。（这指明Squid对本次请求，不会与任何其他服务器（邻居或原始服务器）通信）
